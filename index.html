@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="utf-8"></meta>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <title> SNAIK 🍒 </title>
+  </head>
+  <style>
+    body {
+      background-color: rgb(51,51,51);
+      min-height: 98vh; /* minimum height = screen height */
+      min-width: 98vw;
+      display: flex;
+      flex-wrap: wrap;
+
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      color:white;
+    }
+
+    button{
+      display: block
+    }
+
+    main {
+       margin: auto;
+       box-shadow: 0 0 8px black;
+       transform: rotateZ(360deg);
+    }
+
+    .spinMyHead {
+      animation: YouSpinMyHeadRightRound .3s infinite linear
+    }
+
+    @keyframes YouSpinMyHeadRightRound {
+      from {transform: rotateX(0deg); };
+      to {transform: rotateX(360deg); } ;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 50px;
+    }
+
+  </style>
+  <body>
+    <ul>
+      <li>
+      <main id="main">
+      </main>
+  </li>
+  <li>
+    <button onClick="spicy()"  tabindex="-1"> Chad Mode</button>
+  </li>
+  </body>
+</html>
