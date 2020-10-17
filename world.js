@@ -5,7 +5,7 @@ class AbstractWorld {
     getEmpties(){}
     getValue(){}
   }
-  
+
   class Field extends AbstractWorld {
     constructor(x,y){
       super()
@@ -19,14 +19,14 @@ class AbstractWorld {
         this.grid.push(temp)
       }
     }
-  
+
     updateCoords(p5Vector, newValue){
       let x
       let y
       ({x, y} = p5Vector)
       this.grid[x][y] = newValue
     }
-  
+
     getEmpties(){
       return this.grid.reduce((acc, val, indexx) => {
         val.forEach((element, indexy) => {
@@ -37,7 +37,7 @@ class AbstractWorld {
         return acc
       }, new Set())
     }
-  
+
     getValue(p5V){
       let x
       let y
@@ -48,10 +48,10 @@ class AbstractWorld {
          && y < this.size.y)) {
            return undefined
      }
-  
+
       return this.grid[x][y]
     }
-  
+
     executeOnEach(func) {
       this.grid.forEach( (e, indexx, list) => {
           e.forEach((element, indexy, list) =>{
@@ -59,12 +59,12 @@ class AbstractWorld {
           })
       })
     }
-  
+
     draw(p5V) {
       let x
       let y
       ({x,y} = p5V)
-  
+
       fill(...GameSettings.colors.EMPTY)
       noStroke(0)
       rect(
@@ -74,5 +74,4 @@ class AbstractWorld {
         GameSettings.Rel_Y
       )
     }
-  
   }

@@ -4,11 +4,11 @@ class Snaik {
     constructor() {
       this.body = []
     }
-  
+
     addCoordinates(p5V) {
       this.body.splice(0,0,p5V)
     }
-  
+
     getLastDirection() {
       let sub = p5.Vector.sub(this.body[0], this.body[1])
       switch (true) {
@@ -24,11 +24,11 @@ class Snaik {
           return undefined
       }
     }
-  
+
     getHead(){return this.body[0]}
     getBody(){return this.body}
     chopTail(){return this.body.pop()}
-  
+
 
     drawHull(x,y) {
         let r,g,b
@@ -54,10 +54,10 @@ class Snaik {
             let insetX0 = 2
             let insetX1 = -4
             let insetY0 = 2
-            let insetY1  = -4 
+            let insetY1  = -4
             // stretch the inner rectangle to overshoot the border to connect segments
-            
-            let dir = this.getLastDirection() 
+
+            let dir = this.getLastDirection()
             switch (dir) {
                 case DIRECTION.UP:
                     insetY1 = 2
@@ -95,19 +95,19 @@ class Snaik {
             ({x,y} = segment)
             this.drawHull(x,y)
             this.drawBody(x,y)
-      
+
           } else {
             this.body.forEach(e => {
                 let x
                 let y
-                ({x,y} = e)  
+                ({x,y} = e)
                 this.drawHull(x,y)
             })
 
             this.body.forEach(e => {
                 let x
                 let y
-                ({x,y} = e)  
+                ({x,y} = e)
                 this.drawBody(x,y)
             })
         }
@@ -115,15 +115,15 @@ class Snaik {
 
 
 }
-  
+
     getLength(){return this.body.length}
   }
-  
+
   class Food {
     constructor(){
       this.coords = new p5.Vector()
     }
-  
+
     setCoordinates(p5V){
       let x
       let y
@@ -131,16 +131,16 @@ class Snaik {
       this.coords.x = x
       this.coords.y = y
     }
-  
+
     getCoordinates(){
       return this.coords
     }
-  
+
     draw(){
       let x
       let y
       ({x,y} = this.coords)
-  
+
       textSize(GameSettings.Rel_X - GameSettings.Rel_X / 4)
       strokeWeight(.5)
       textAlign(CENTER)
@@ -152,4 +152,3 @@ class Snaik {
         GameSettings.Rel_Y)
     }
   }
-  

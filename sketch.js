@@ -48,7 +48,7 @@ function draw() {
     if(GAME.gameWon() || gameOver) {
         enrollEnd()
     }
-    
+
     cycles = 0
   }
 }
