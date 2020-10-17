@@ -29,54 +29,91 @@ class Snaik {
     getBody(){return this.body}
     chopTail(){return this.body.pop()}
   
-    draw(segment){
-        let draww = (xx, yy) => {
+
+    drawHull(x,y) {
+        let r,g,b
+        [r , g, b] = GameSettings.colors.SNAIK
+
+        let brightnesss = -10
+        x = x * GameSettings.Rel_X
+        y = y * GameSettings.Rel_Y
+        fill(r + brightnesss, g+ brightnesss,b+ brightnesss)
+        noStroke()
+        rect( x,
+            y,
+            GameSettings.Rel_X ,
+            GameSettings.Rel_Y)
+    }
+
+    drawBody(x,y) {
             let r,g,b
             [r , g, b] = GameSettings.colors.SNAIK
+             x = x * GameSettings.Rel_X
+             y = y * GameSettings.Rel_Y
 
-            let brightnesss = -10
-            fill(r + brightnesss, g+ brightnesss,b+ brightnesss)
+            let insetX0 = 2
+            let insetX1 = -4
+            let insetY0 = 2
+            let insetY1  = -4 
+            // stretch the inner rectangle to overshoot the border to connect segments
+            
+            let dir = this.getLastDirection() 
+            switch (dir) {
+                case DIRECTION.UP:
+                    insetY1 = 2
+                    insetY0 = 2
+                    break
+                case DIRECTION.RIGHT:
+                    insetX0 = -2
+                    insetX1 = 2
+                    break
+                case DIRECTION.LEFT:
+                    insetX1 = 2
+                    break
+                case DIRECTION.DOWN:
+                    insetY0 = -2
+                    insetY1 = 2
+                    break
+                default:
+                    break
+            }
 
-            let x = xx * GameSettings.Rel_X
-            let y = yy * GameSettings.Rel_Y
-
-            let inset = 4
-
+            fill(r, g,b)
             noStroke()
             rect(
-                x + inset,
-                y + inset,
-                GameSettings.Rel_X - inset,
-                GameSettings.Rel_Y - inset)
-            
-                fill(r,g,b)
-                inset = 0
-                noStroke()
-                rect( x + inset,
-                    y + inset,
-                    GameSettings.Rel_X - inset,
-                    GameSettings.Rel_Y - inset)
+                x + insetX0,
+                y + insetY0,
+                GameSettings.Rel_X + insetX1,
+                GameSettings.Rel_Y + insetY1)
+    }
 
-
-
-
-        }
-
-      if(segment) {
-        let indent = 0
-        let x
-        let y
-        ({x,y} = segment)
-        draww(x,y)
-  
-      } else {
-        this.body.forEach(e => {
+    draw(segment){
+        if(segment) {
+            let indent = 0
             let x
             let y
-            ({x,y} = e)
-            draww(x,y)
-        })
-    }
+            ({x,y} = segment)
+            this.drawHull(x,y)
+            this.drawBody(x,y)
+      
+          } else {
+            this.body.forEach(e => {
+                let x
+                let y
+                ({x,y} = e)  
+                this.drawHull(x,y)
+            })
+
+            this.body.forEach(e => {
+                let x
+                let y
+                ({x,y} = e)  
+                this.drawBody(x,y)
+            })
+        }
+
+
+
 }
   
     getLength(){return this.body.length}
